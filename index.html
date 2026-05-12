@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anirudh Yerroju — Security Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #F7F6F2;
+    --surface: #FFFFFF;
+    --border: #E3E1D8;
+    --text: #1A1917;
+    --muted: #6B6A65;
+    --faint: #9B9992;
+    --accent: #1A1917;
+    --blue-bg: #EBF2FC;
+    --blue-text: #0C447C;
+    --amber-bg: #FDF3E0;
+    --amber-text: #633806;
+    --teal-bg: #E0F5EE;
+    --teal-text: #085041;
+    --purple-bg: #EEEDFE;
+    --purple-text: #3C3489;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: rgba(247, 246, 242, 0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .nav-name { font-size: 13px; font-weight: 500; letter-spacing: 0.02em; }
+  .nav-links { display: flex; gap: 1.5rem; }
+  .nav-links a { font-size: 12px; color: var(--muted); letter-spacing: 0.04em; text-transform: uppercase; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--text); }
+
+  .wrapper { max-width: 760px; margin: 0 auto; padding: 0 2rem 5rem; }
+
+  /* Hero */
+  .hero { padding: 5rem 0 4rem; border-bottom: 1px solid var(--border); margin-bottom: 4rem; }
+  .hero-label { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint); margin-bottom: 1.5rem; }
+  .hero-name { font-size: clamp(2.4rem, 6vw, 3.5rem); font-weight: 300; line-height: 1.1; letter-spacing: -0.02em; color: var(--text); margin-bottom: 0.75rem; }
+  .hero-name span { font-weight: 500; }
+  .hero-title { font-size: 15px; color: var(--muted); margin-bottom: 2rem; }
+  .hero-summary { font-size: 15px; color: var(--text); line-height: 1.8; max-width: 600px; margin-bottom: 2.5rem; }
+  .hero-summary strong { font-weight: 500; }
+  .hero-contacts { display: flex; flex-wrap: wrap; gap: 10px; }
+  .contact-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 12px; padding: 6px 14px;
+    border: 1px solid var(--border); border-radius: 99px;
+    color: var(--muted); background: var(--surface);
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .contact-chip:hover { border-color: var(--text); color: var(--text); }
+  .contact-chip svg { width: 13px; height: 13px; stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+  /* Impact numbers */
+  .impact-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 4rem; }
+  .impact-cell { background: var(--surface); padding: 1.5rem 1.25rem; }
+  .impact-number { font-size: 2rem; font-weight: 300; letter-spacing: -0.03em; color: var(--text); line-height: 1; margin-bottom: 4px; }
+  .impact-number span { font-weight: 500; }
+  .impact-desc { font-size: 12px; color: var(--muted); line-height: 1.5; }
+
+  /* Section */
+  section { margin-bottom: 4rem; }
+  .section-header { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 1.75rem; }
+  .section-title { font-size: 11px; font-family: 'DM Mono', monospace; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint); white-space: nowrap; }
+  .section-rule { flex: 1; height: 1px; background: var(--border); }
+
+  /* Experience */
+  .exp-item { margin-bottom: 2.5rem; }
+  .exp-meta { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; margin-bottom: 0.5rem; flex-wrap: wrap; }
+  .exp-company { font-size: 13px; font-weight: 500; color: var(--text); }
+  .exp-location { font-size: 12px; color: var(--faint); }
+  .exp-role { font-size: 15px; font-weight: 500; color: var(--text); margin-bottom: 4px; }
+  .exp-period { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--faint); white-space: nowrap; }
+  .exp-bullets { list-style: none; padding: 0; }
+  .exp-bullets li { font-size: 14px; color: var(--muted); line-height: 1.75; padding-left: 1.25rem; position: relative; margin-bottom: 6px; }
+  .exp-bullets li::before { content: "—"; position: absolute; left: 0; color: var(--border); }
+  .exp-bullets li strong { color: var(--text); font-weight: 500; }
+  .exp-divider { height: 1px; background: var(--border); margin: 2rem 0; }
+
+  /* Skills grid */
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px; }
+  .skill-group { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 1rem 1.1rem; }
+  .skill-group-label { font-size: 11px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 10px; }
+  .skill-group-label.blue { color: var(--blue-text); }
+  .skill-group-label.amber { color: var(--amber-text); }
+  .skill-group-label.teal { color: var(--teal-text); }
+  .skill-group-label.purple { color: var(--purple-text); }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+  .tag { font-size: 11px; padding: 3px 9px; border-radius: 99px; }
+  .tag.blue { background: var(--blue-bg); color: var(--blue-text); }
+  .tag.amber { background: var(--amber-bg); color: var(--amber-text); }
+  .tag.teal { background: var(--teal-bg); color: var(--teal-text); }
+  .tag.purple { background: var(--purple-bg); color: var(--purple-text); }
+
+  /* Certifications */
+  .cert-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; }
+  .cert-item { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 0.9rem 1.1rem; display: flex; gap: 10px; align-items: flex-start; }
+  .cert-icon { width: 32px; height: 32px; border-radius: 8px; background: var(--bg); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .cert-icon svg { width: 16px; height: 16px; stroke: var(--muted); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .cert-name { font-size: 13px; font-weight: 500; color: var(--text); line-height: 1.4; }
+  .cert-body { font-size: 11px; color: var(--faint); margin-top: 2px; }
+
+  /* Education */
+  .edu-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 1.25rem 1.5rem; display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; flex-wrap: wrap; }
+  .edu-degree { font-size: 15px; font-weight: 500; color: var(--text); margin-bottom: 4px; }
+  .edu-school { font-size: 13px; color: var(--muted); }
+  .edu-focus { font-size: 12px; color: var(--faint); margin-top: 6px; max-width: 380px; }
+  .edu-year { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--faint); white-space: nowrap; }
+
+  /* Footer */
+  footer { border-top: 1px solid var(--border); padding: 2rem 0 0; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+  .footer-name { font-size: 13px; font-weight: 500; }
+  .footer-note { font-size: 12px; color: var(--faint); }
+
+  @media (max-width: 600px) {
+    .impact-row { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+    .hero { padding: 3rem 0 2.5rem; }
+  }
+
+  .fade-in { opacity: 0; transform: translateY(16px); animation: fadeIn 0.6s ease forwards; }
+  @keyframes fadeIn { to { opacity: 1; transform: none; } }
+  .fade-in:nth-child(1) { animation-delay: 0.05s; }
+  .fade-in:nth-child(2) { animation-delay: 0.12s; }
+  .fade-in:nth-child(3) { animation-delay: 0.19s; }
+  .fade-in:nth-child(4) { animation-delay: 0.26s; }
+  .fade-in:nth-child(5) { animation-delay: 0.33s; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-name">Anirudh Yerroju</div>
+  <div class="nav-links">
+    <a href="#experience">Experience</a>
+    <a href="#skills">Skills</a>
+    <a href="#certs">Certifications</a>
+    <a href="#education">Education</a>
+  </div>
+</nav>
+
+<div class="wrapper">
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="hero-label fade-in">Security Engineer · Seattle, WA</div>
+    <h1 class="hero-name fade-in"><span>Anirudh</span> Yerroju</h1>
+    <div class="hero-title fade-in">Cloud Security · AppSec · DevSecOps · Vulnerability Management · AI Security</div>
+    <p class="hero-summary fade-in">
+      Security engineer with <strong>6+ years</strong> designing and operating cloud-native security programs across AWS, DevSecOps, and vulnerability management. Experienced building security controls, automation pipelines, and audit-credible evidence workflows — collaborating with engineering and executive leadership across SOC 2, NIST, and CIS frameworks.
+    </p>
+    <div class="hero-contacts fade-in">
+      <a href="mailto:yerrojuanirudh@gmail.com" class="contact-chip">
+        <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
+        yerrojuanirudh@gmail.com
+      </a>
+      <a href="https://linkedin.com/in/ayerroju" target="_blank" class="contact-chip">
+        <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="4"/><line x1="8" y1="11" x2="8" y2="17"/><line x1="8" y1="7" x2="8" y2="8"/><path d="M12 17v-6M16 17v-4a2 2 0 0 0-4 0"/></svg>
+        linkedin.com/in/ayerroju
+      </a>
+      <a href="tel:5512207536" class="contact-chip">
+        <svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>
+        551-220-7536
+      </a>
+    </div>
+  </div>
+
+  <!-- Impact numbers -->
+  <div class="impact-row">
+    <div class="impact-cell">
+      <div class="impact-number">30<span>k+</span></div>
+      <div class="impact-desc">Cloud resources secured across AWS infrastructure</div>
+    </div>
+    <div class="impact-cell">
+      <div class="impact-number">47<span>%</span></div>
+      <div class="impact-desc">Reduction in false positives via AI-driven triage</div>
+    </div>
+    <div class="impact-cell">
+      <div class="impact-number">14<span>hrs</span></div>
+      <div class="impact-desc">Weekly engineering time reclaimed through automation</div>
+    </div>
+  </div>
+
+  <!-- Experience -->
+  <section id="experience">
+    <div class="section-header">
+      <span class="section-title">Experience</span>
+      <div class="section-rule"></div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-meta">
+        <div>
+          <div class="exp-company">Amazon Web Services, Inc. — Seattle, WA</div>
+        </div>
+      </div>
+      <div style="display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:8px; margin-bottom:10px;">
+        <div class="exp-role">Security Engineer II</div>
+        <div class="exp-period">Oct 2022 – Present</div>
+      </div>
+      <ul class="exp-bullets">
+        <li>Engineered and enforced security baseline controls across <strong>30,000+ cloud resources</strong> — deployed least privilege IAM policies, CloudFormation IaC guardrails, and container/serverless security configurations spanning 100+ services.</li>
+        <li>Built <strong>agentic AI and Python automation</strong> to eliminate redundant vulnerability triage workflows — reduced false positives by 47% and reclaimed 14 hours/week of engineering time across 100+ services.</li>
+        <li>Owned end-to-end remediation of critical supply chain CVEs — drove <strong>FFmpeg (CVSS 9.8, 35+ services)</strong>, Log4net (75+ repos), and Apache Parquet CVE-2025-30065 (<strong>CVSS 10.0, 60+ pipelines</strong>) to verified closure; triaged 134 high-severity findings.</li>
+        <li>Authored security standards, remediation procedures, and audit-credible control documentation — <strong>reduced recurring vulnerability classes by 20%</strong> and established scalable SOC 2-aligned operational baselines.</li>
+      </ul>
+    </div>
+
+    <div class="exp-divider"></div>
+
+    <div class="exp-item">
+      <div style="display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:8px; margin-bottom:10px;">
+        <div class="exp-role">Cloud Security Engineer II</div>
+        <div class="exp-period">Feb 2021 – Oct 2022</div>
+      </div>
+      <ul class="exp-bullets">
+        <li>Designed and deployed cloud security architecture across <strong>AWS IAM, Cognito, KMS, WAF, and Shield</strong> — enforced least privilege identity controls and remediated 1,000+ vulnerabilities across authentication, encryption, and cloud misconfiguration.</li>
+        <li>Led incident response under active infrastructure attack — investigated threat vectors, contained the incident, and implemented systemic controls; conducted <strong>100+ security architecture reviews</strong> driving cross-functional remediation.</li>
+        <li>Built Python-based security automation to streamline vulnerability tracking, evidence collection, and remediation workflows.</li>
+      </ul>
+    </div>
+
+    <div class="exp-divider"></div>
+
+    <div class="exp-item">
+      <div class="exp-meta">
+        <div class="exp-company">Secureworks — Dell Technologies Inc., Seattle, WA</div>
+      </div>
+      <div style="display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:8px; margin-bottom:10px;">
+        <div class="exp-role">Senior Cyber Security Analyst</div>
+        <div class="exp-period">Mar 2020 – Feb 2021</div>
+      </div>
+      <ul class="exp-bullets">
+        <li>Delivered cloud security assessments across <strong>8 enterprise environments</strong> — identified and remediated 40+ critical findings per engagement across IAM misconfigurations, encryption gaps, and infrastructure exposures.</li>
+        <li>Engineered automated <strong>SAST/DAST and supply chain security checks</strong> integrated into client CI/CD pipelines — measurably improved pre-deployment vulnerability detection rates across client DevSecOps workflows.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <section id="skills">
+    <div class="section-header">
+      <span class="section-title">Skills & expertise</span>
+      <div class="section-rule"></div>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <div class="skill-group-label blue">Cloud & Infrastructure</div>
+        <div class="skill-tags">
+          <span class="tag blue">AWS IAM</span>
+          <span class="tag blue">KMS</span>
+          <span class="tag blue">GuardDuty</span>
+          <span class="tag blue">Security Hub</span>
+          <span class="tag blue">WAF</span>
+          <span class="tag blue">Shield</span>
+          <span class="tag blue">CloudTrail</span>
+          <span class="tag blue">Lambda</span>
+          <span class="tag blue">ECS</span>
+          <span class="tag blue">CSPM</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-label amber">DevSecOps & AppSec</div>
+        <div class="skill-tags">
+          <span class="tag amber">SAST / DAST / SCA</span>
+          <span class="tag amber">CI/CD Security</span>
+          <span class="tag amber">Supply Chain</span>
+          <span class="tag amber">Semgrep</span>
+          <span class="tag amber">Pre-merge Validation</span>
+          <span class="tag amber">Python Automation</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-label teal">Vulnerability Management</div>
+        <div class="skill-tags">
+          <span class="tag teal">CVE / CVSS / EPSS</span>
+          <span class="tag teal">SLA Remediation</span>
+          <span class="tag teal">Threat Modeling</span>
+          <span class="tag teal">Patch Verification</span>
+          <span class="tag teal">Incident Response</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-label purple">AI Security & GRC</div>
+        <div class="skill-tags">
+          <span class="tag purple">Agentic AI Security</span>
+          <span class="tag purple">LLM Red Teaming</span>
+          <span class="tag purple">SOC 2</span>
+          <span class="tag purple">NIST CSF</span>
+          <span class="tag purple">CIS Benchmarks</span>
+          <span class="tag purple">Control Mapping</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Certifications -->
+  <section id="certs">
+    <div class="section-header">
+      <span class="section-title">Certifications</span>
+      <div class="section-rule"></div>
+    </div>
+    <div class="cert-list">
+      <div class="cert-item">
+        <div class="cert-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M8 14l-4 8h16l-4-8"/></svg>
+        </div>
+        <div>
+          <div class="cert-name">GWAPT</div>
+          <div class="cert-body">GIAC Web Application Penetration Tester</div>
+        </div>
+      </div>
+      <div class="cert-item">
+        <div class="cert-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-6 4 2 7-6-4-6 4 2-7-6-4h7z"/></svg>
+        </div>
+        <div>
+          <div class="cert-name">GCIH</div>
+          <div class="cert-body">GIAC Certified Incident Handler</div>
+        </div>
+      </div>
+      <div class="cert-item">
+        <div class="cert-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-6 4 2 7-6-4-6 4 2-7-6-4h7z"/></svg>
+        </div>
+        <div>
+          <div class="cert-name">GEVA</div>
+          <div class="cert-body">GIAC Enterprise Vulnerability Assessor</div>
+        </div>
+      </div>
+      <div class="cert-item">
+        <div class="cert-icon">
+          <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        </div>
+        <div>
+          <div class="cert-name">Security+</div>
+          <div class="cert-body">CompTIA Security+</div>
+        </div>
+      </div>
+      <div class="cert-item">
+        <div class="cert-icon">
+          <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6" y2="6"/><line x1="6" y1="18" x2="6" y2="18"/></svg>
+        </div>
+        <div>
+          <div class="cert-name">CCNA</div>
+          <div class="cert-body">Cisco Certified Network Associate</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Education -->
+  <section id="education">
+    <div class="section-header">
+      <span class="section-title">Education</span>
+      <div class="section-rule"></div>
+    </div>
+    <div class="edu-card">
+      <div>
+        <div class="edu-degree">M.S. Electrical Engineering</div>
+        <div class="edu-school">New Jersey Institute of Technology, Newark, NJ</div>
+        <div class="edu-focus">Major: Network Security, Cryptographic Systems, and Distributed Systems</div>
+      </div>
+      <div class="edu-year">Dec 2019</div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-name">Anirudh Yerroju</div>
+    <div class="footer-note">Security Engineer · Seattle, WA · yerrojuanirudh@gmail.com</div>
+  </footer>
+
+</div>
+</body>
+</html>
